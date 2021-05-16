@@ -56,8 +56,12 @@
     </header>
     <!--ここまでheader-->
     <main>
-      <p id="notice"></p>
-    <%= yield %>
+      <p>
+        <% flash.each do |key, value| %>
+          <%= content_tag(:div, value, class: "#{key}") %>
+        <% end %>
+      </p>
+      <%= yield %>
     </main>
 
     <!--ここからフッター-->
