@@ -59,4 +59,12 @@ class Users::RegistrationsController < Devise::RegistrationsController
   # def after_inactive_sign_up_path_for(resource)
   #   super(resource)
   # end
+
+  def create
+    # スーパークラス（devise)のcreateアクションを呼び出す。
+    super
+    # WelcomeMailerクラスのsend_when_signupメソッドを呼び出し、POSTで受け取ったuserのemailとnameを渡す
+    WelcomeMailer.send_when_signup(params[:user][:email], params[:user][:name]).deliver
+  end
+
 end
